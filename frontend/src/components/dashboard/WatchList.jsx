@@ -16,7 +16,7 @@ const WatchList = ({ onSelect, selectedSymbol }) => {
   const [selectedList, setSelectedList] = useState('default');
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const navigate = useNavigate();
-
+ 
   const fetchData = async () => {
     try {
       const symbols = watchlists[selectedList] || [];
@@ -60,7 +60,7 @@ const WatchList = ({ onSelect, selectedSymbol }) => {
     <div className="watchlist-container">
       <div className="watchlist-header-wrapper">
         <div className="watchlist-header">
-          <h2>{selectedList === 'default' ? 'Default Watchlist' : selectedList}</h2>
+          <h2>{selectedList === 'default' ? ' Watchlist' : selectedList}</h2>
           <div className="dropdown-wrapper">
             <button className="dropdown-btn" onClick={() => setDropdownOpen(!dropdownOpen)}>
               ▼
@@ -82,7 +82,7 @@ const WatchList = ({ onSelect, selectedSymbol }) => {
 
       <div className="watchlist-cards">
         {stocksData.map((stock) => (
-          <StockCard
+          <StockCard 
             key={stock.symbol}
             data={stock}
             isWatched={watchlists[selectedList]?.includes(stock.symbol)}

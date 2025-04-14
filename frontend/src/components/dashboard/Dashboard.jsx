@@ -41,10 +41,21 @@ const Dashboard = () => {
     fetchUser();
   }, []);
 
-  if (loading || !user?.firstName) return <div className="loading-text">Loading dashboard...</div>;
+  if (loading || !user?.firstName) return <div className="loading-text">Loading dashboard...</div>; 
 
   return (
     <div className="dashboard-wrapper">
+       {/* 📈 Revamped Chart + Stock List Section */}
+       <section className="market-section">
+        <div className="chart-container">
+          <StockChart symbol={selectedStock} />
+        </div>
+        <div className="stocklist-container">
+          {/* <StockList onSelect={setSelectedStock} /> */}
+          <WatchList onSelect={setSelectedStock} selectedSymbol={selectedStock} />
+
+        </div>
+      </section>
       {/* 👋 Full View Welcome Section */}
       <section className="hero-section">
         <div className="hero-content">
@@ -58,19 +69,7 @@ const Dashboard = () => {
         </div>
       </section>
 
-      {/* 📈 Revamped Chart + Stock List Section */}
-      <section className="market-section">
-        <div className="chart-container">
-          <StockChart symbol={selectedStock} />
-        </div>
-        <div className="stocklist-container">
-          {/* <StockList onSelect={setSelectedStock} /> */}
-          <WatchList onSelect={setSelectedStock} selectedSymbol={selectedStock} />
-
-
-          
-        </div>
-      </section>
+     
     </div> 
   );
 };

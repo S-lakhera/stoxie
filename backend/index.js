@@ -6,6 +6,7 @@ import authRoutes from './routes/auth.js';
 import testRoutes from './routes/test.js'; // Add this line
 import userRoutes from './routes/userRoutes.js'
 import stockRoutes from './routes/stockRoutes.js';
+import orderRoutes from './routes/orderRoutes.js';
 
 
 
@@ -20,6 +21,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/test', testRoutes); // Add this line below authRoutes
 app.use("/api/user", userRoutes);
 app.use('/api/stocks', stockRoutes);
+app.use('/api/orders', orderRoutes);
 
 
 connectDB();

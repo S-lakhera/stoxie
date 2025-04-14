@@ -70,14 +70,20 @@ const AllStocks = () => {
 
   return (
     <div className="all-stocks-wrapper">
-      <h1 className="all-stocks-title">📈 Explore Top US Stocks</h1>
-      <input
-        type="text"
-        className="stock-search-input"
-        placeholder="🔍 Search stocks..."
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-      />
+      <div className="all-stocks-header">
+        <h1 className="all-stocks-title">Explore Top US Stocks</h1>
+        <div className="stock-search-wrapper">
+          <i className="fas fa-search search-icon" />
+          <input
+            type="text"
+            className="stock-search-input"
+            placeholder="Search stocks..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+        </div>
+      </div>
+
 
       <div className="stock-list">
         {visibleStocks.map(stock => (

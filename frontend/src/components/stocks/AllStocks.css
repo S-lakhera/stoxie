@@ -25,4 +25,44 @@
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     gap: 1.5rem;
   }
+  .all-stocks-header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    /* gap: 1rem; */
+    margin-bottom: 1.5rem;
+  }
+  
+  .all-stocks-title {
+    font-size: 2rem;
+    margin: 0 auto; /* center it in the container */
+    flex-grow: 1;
+    text-align: center;
+  }
+  
+  .stock-search-wrapper {
+    position: relative;
+    width: 350px;
+    right: 8rem;
+  }
+  
+  .stock-search-input {
+    width: 100%;
+    padding: 0.6rem 0.6rem 0.6rem 2.5rem; /* left space for icon */
+    font-size: 0.95rem;
+    border-radius: 6px;
+    border: none;
+    outline: none;
+  }
+  
+  .search-icon {
+    position: absolute;
+    top: 30%;
+    left: 10px;
+    transform: translateY(-50%);
+    color: #888;
+    font-size: 0.9rem;
+    pointer-events: none;
+  }
   

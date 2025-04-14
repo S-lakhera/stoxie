@@ -10,20 +10,20 @@ import {
   PointElement,
   Tooltip
 } from 'chart.js';
-
+ 
 ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement, Tooltip);
 
 const intervals = {
-    '1D': { interval: '5min', outputsize: 78 }, // roughly 6.5 hours of trading
-    '1W': { interval: '1h', outputsize: 40 },
-    '1M': { interval: '1day', outputsize: 30 },
-    '6M': { interval: '1day', outputsize: 120 },
-    '1Y': { interval: '1week', outputsize: 52 },
+    '5min': { interval: '5min', outputsize: 28 }, // roughly 6.5 hours of trading
+    '1h': { interval: '1h', outputsize: 20 },
+    '1day': { interval: '1day', outputsize: 30 },
+    '1week': { interval: '1week', outputsize: 52 },
+    '1month': { interval: '1month', outputsize: 50 },
   };
   
 
 const StockGraph = ({ symbol }) => {
-  const [timeframe, setTimeframe] = useState('1W');
+  const [timeframe, setTimeframe] = useState('1h');
   const [chartData, setChartData] = useState(null);
 
   const fetchData = async () => {

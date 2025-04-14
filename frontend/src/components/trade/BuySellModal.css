@@ -1,0 +1,146 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(3px);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.modal-container {
+  background-color: #1a1a2e;
+  color: white;
+  border-radius: 12px;
+  padding: 25px;
+  width: 420px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
+  animation: slideUp 0.3s ease-in-out;
+  position: relative;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header h2 {
+  font-size: 1.4rem;
+  margin: 0;
+}
+
+.close-btn {
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.modal-subinfo {
+  font-size: 0.9rem;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  color: #ccc;
+}
+
+.transaction-toggle {
+  display: flex;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.transaction-toggle button {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  background-color: #333;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.transaction-toggle button.active {
+  background-color: #5535a7;
+}
+
+.modal-field {
+  margin-bottom: 15px;
+}
+
+.modal-field input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 6px;
+  border: none;
+  font-size: 1rem;
+}
+
+.modal-summary {
+  font-size: 1rem;
+  margin-bottom: 10px;
+  color: #a1e3a1;
+}
+
+.error {
+  color: tomato;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.modal-actions button {
+  flex: 1;
+  padding: 10px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  color: white;
+  background-color: #5535a7;
+  transition: background 0.3s;
+}
+
+.modal-actions .cancel-btn {
+  background-color: #444;
+}
+
+.modal-actions button:hover {
+  opacity: 0.9;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes scaleFade {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.modal-container {
+  animation: scaleFade 0.25s ease-out;
+}

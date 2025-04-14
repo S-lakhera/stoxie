@@ -1,50 +1,42 @@
-import React from 'react';
-import './Orders.css'; // optional CSS
+import React, { useEffect, useState } from 'react';
+import { useAuth } from '../../context/AuthContext';
+import './Orders.css'
+
 
 const Orders = () => {
-  // Dummy data
-  const orders = [
-    {
-      id: 1,
-      symbol: 'AAPL',
-      type: 'Buy',
-      quantity: 10,
-      price: 175.5,
-      status: 'Executed',
-      date: '2025-04-11',
-    },
-    {
-      id: 2,
-      symbol: 'GOOGL',
-      type: 'Sell',
-      quantity: 5,
-      price: 2850.75,
-      status: 'Pending',
-      date: '2025-04-10',
-    },
-  ];
+  const { user } = useAuth();
+  const [orders, setOrders] = useState([]);
 
+  useEffect(() => {
+    if (!user?._id) return;
+  
+    const fetchOrders = async () => {
+      try {
+        const res = await fetch(`http://localhost:5000/api/orders/${user._id}`);
+        const data = await res.json();
+        setOrders(data);
+      } catch (err) {
+        console.error("Failed to fetch orders:", err);
+      }
+    };
+  
+    fetchOrders();
+  }, [user?._id]);
+  
   return (
     <div className="orders-page">
-      <h2>Orders</h2>
-      {orders.length === 0 ? (
-        <p>No orders placed yet.</p>
-      ) : (
+      <h2>Your Orders</h2>
+      {orders.length === 0 ? <p>No orders yet</p> : (
         <table className="orders-table">
           <thead>
             <tr>
-              <th>Date</th>
-              <th>Symbol</th>
-              <th>Type</th>
-              <th>Qty</th>
-              <th>Price</th>
-              <th>Status</th>
+              <th>Date</th><th>Symbol</th><th>Type</th><th>Qty</th><th>Price</th><th>Status</th>
             </tr>
           </thead>
           <tbody>
-            {orders.map((order) => (
-              <tr key={order.id}>
-                <td>{order.date}</td>
+            {orders.map(order => (
+              <tr key={order._id}>
+                <td>{new Date(order.date).toLocaleDateString()}</td>
                 <td>{order.symbol}</td>
                 <td>{order.type}</td>
                 <td>{order.quantity}</td>
@@ -59,4 +51,4 @@ const Orders = () => {
   );
 };
 
-export default Orders;
+export default Orders
