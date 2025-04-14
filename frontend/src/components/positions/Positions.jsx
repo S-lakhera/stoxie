@@ -20,7 +20,7 @@ const Positions = () => {
       pnl: -300,
     },
   ];
-
+ 
   return (
     <div className="positions-page">
       <h2>Positions</h2>

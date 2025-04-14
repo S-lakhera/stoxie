@@ -28,14 +28,27 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem("stoxieUser", JSON.stringify(updatedUser));
     setUser(updatedUser);
   };
+  
+  const updateBalance = (newBalance) => {
+    if (!user) return;
+    
+    const updatedUser = {
+      ...user,
+      balance: newBalance
+    };
 
+    localStorage.setItem("stoxieUser", JSON.stringify(updatedUser));
+    setUser(updatedUser);
+  };
+  
   const logout = () => {
     localStorage.removeItem("stoxieUser");
     setUser(null);
   };
 
+
   return (
-    <AuthContext.Provider value={{ user, login, logout, setUser }}>
+    <AuthContext.Provider value={{ user, login, logout, setUser, updateBalance }}>
       {children}
     </AuthContext.Provider>
   );

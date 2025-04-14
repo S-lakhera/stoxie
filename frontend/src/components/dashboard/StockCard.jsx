@@ -5,7 +5,7 @@ import BuySellModal from '../trade/BuySellModal'; // Import BuySellModal
 import './StockCard.css';
 
 const StockCard = ({ data, onClick, selected }) => {
-  const { user } = useAuth(); // Get user data from AuthContext
+  const { user,updateBalance } = useAuth(); // Get user data from AuthContext
   const [isModalOpen, setIsModalOpen] = useState(false); // Modal state
 
   const isPositive = data?.change > 0;
@@ -13,18 +13,26 @@ const StockCard = ({ data, onClick, selected }) => {
   const formattedChange = `${isPositive ? '+' : ''}${Number(data?.change || 0).toFixed(2)}`;
   const formattedPercent = `${isPositive ? '+' : ''}${Number(data?.percent || 0).toFixed(2)}%`;
  
-  const handleBuyClick = () => {
-    console.log("CLicked Buy");
-    setIsModalOpen(true); // Open modal for buying
-  };
-  
-  const handleSellClick = () => {
-    console.log("CLicked Sell");
-    setIsModalOpen(true); // Open modal for selling
-  };
+  const [transactionType, setTransactionType] = useState('buy'); // New state
 
+
+const handleBuyClick = (e) => {
+  e.stopPropagation();
+  setTransactionType('buy');
+  setIsModalOpen(true);
+};
+
+const handleSellClick = (e) => {
+  e.stopPropagation();
+  setTransactionType('sell');
+  setIsModalOpen(true);
+};
   const closeModal = () => {
     setIsModalOpen(false); // Close modal
+  };
+
+  const handleTransactionSuccess = (newBalance) => {
+    updateBalance(newBalance);
   };
 
   return (
@@ -51,6 +59,8 @@ const StockCard = ({ data, onClick, selected }) => {
           stockPrice={data?.price} 
           closeModal={closeModal} 
           userBalance={user?.balance || 0} 
+          transactionType={transactionType}
+          onTransactionSuccess={handleTransactionSuccess}
         />
       )}
     </div>

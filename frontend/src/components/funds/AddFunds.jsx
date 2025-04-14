@@ -33,7 +33,7 @@ const AddFunds = () => {
     try {
       const response = await axios.patch(`http://localhost:5000/api/user/balance/${user._id}`, {
         type: mode,
-        amount: amt,
+        amount: amt, 
       });
  
       const newBalance = response.data.balance;
