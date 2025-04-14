@@ -1,0 +1,52 @@
+/* .landing-wrapper {
+    height: 100vh;
+    overflow-y: auto;
+    background: linear-gradient(135deg, #0B0E26, #1B1E41);
+    display: block;
+    min-height: 100vh;
+    color: white;
+  } */
+  
+  .hero-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center;
+    padding: 0px 20px;
+    text-align: center;
+  }
+  
+  .landing-logo {
+    width: 100px;
+    margin-bottom: 20px;
+  }
+  
+  .landing-title {
+    font-size: 3rem;
+    color: #8d9bff;
+    margin-bottom: 10px;
+    font-weight: bold;
+    letter-spacing: 1px;
+  }
+  
+  .landing-tagline {
+    font-size: 1.2rem;
+    color: #b3baff;
+    margin-bottom: 30px;
+  }
+  
+  .cta-button {
+    background: linear-gradient(90deg, #666aff, #8184ff);
+    padding: 14px 28px;
+    border-radius: 10px;
+    color: white;
+    font-weight: 500;
+    text-decoration: none;
+    transition: 0.3s ease;
+  }
+  
+  .cta-button:hover {
+    background: linear-gradient(90deg, #8184ff, #666aff);
+  }
+  

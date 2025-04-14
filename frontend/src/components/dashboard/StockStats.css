@@ -1,0 +1,23 @@
+.stock-stats-container {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .stat-card {
+    background: #1c1c2c;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px #00000050;
+    min-width: 120px;
+    text-align: center;
+    color: #fff;
+    transition: transform 0.2s;
+  }
+   
+  .stat-card:hover {
+    transform: translateY(-3px);
+  }
+  

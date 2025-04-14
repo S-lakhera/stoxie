@@ -1,0 +1,59 @@
+.about-page {
+    padding: 2rem;
+    color: #f0f0f0;
+    background: linear-gradient(-225deg, #000000 0%, #5535a7 51%, #3071d280 100%);
+  }
+  
+  .about-hero h2, .about-team h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    text-align: center; 
+  }
+  
+  .about-hero p {
+    max-width: 800px;
+    margin: 0 auto 1rem;
+    line-height: 1.6;
+    text-align: center;
+  }
+  
+  .about-team {
+    margin-top: 4rem;
+    text-align: center;
+  }
+  
+  .team-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    padding: 2rem 1rem;
+  }
+  
+  .team-card {
+    background: linear-gradient(-225deg, #000000 0%, #5535a7 51%, #3071d280 100%);
+    padding: 1.5rem;
+    border-radius: 1rem;
+    width: 250px;
+    text-align: center;
+    transition: transform 0.3s ease;
+  }
+  
+  .team-card:hover {
+    transform: scale(1.05);
+  }
+  
+  .team-card img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1rem;
+  }
+  
+  .role {
+    color: #00bcd4;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+  

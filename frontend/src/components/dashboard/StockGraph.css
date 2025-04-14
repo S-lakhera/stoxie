@@ -1,0 +1,30 @@
+.stock-graph-wrapper {
+    background: #1e1e30;
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    color: white;
+  }
+  
+  .interval-buttons {
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+  
+  .interval-btn {
+    background: transparent;
+    border: 1px solid #4cc9f0;
+    color: #4cc9f0;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  
+  .interval-btn.active,
+  .interval-btn:hover {
+    background: #4cc9f0;
+    color: #000;
+  }
+  

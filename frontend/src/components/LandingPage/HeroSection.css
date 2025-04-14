@@ -1,0 +1,83 @@
+.hero-section {
+  height: 100vh;
+  background: linear-gradient(-225deg, #000000 0%, #5535a7 51%, #3071d280 100%);
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* 👈 pehle center tha */
+  align-items: center;
+  color: white;
+  text-align: center;
+  padding: 0 50px;
+}
+
+.hero-content {
+  animation: fadeSlideIn 1.2s ease-out forwards;
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+@keyframes fadeSlideIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-logo {
+  width: 300px;
+  height: 280px;
+  margin-top: -20px; /* 👈 thoda kam kiya niche se */
+  animation: popIn 0.8s ease-in-out;
+}
+
+@keyframes popIn {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* .hero-title {
+  font-size: 3.5rem;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 15px;
+  letter-spacing: 10px;
+  animation: glow 2s infinite alternate;
+} */
+
+/* @keyframes glow {
+  0% {
+    text-shadow: 0 0 5px #8d9bff, 0 0 10px #8d9bff;
+  }
+  100% {
+    text-shadow: 0 0 15px #aab4ff, 0 0 30px #aab4ff;
+  }
+} */
+
+.hero-tagline {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  color: #d0d2ff;
+}
+
+.cta-button {
+  padding: 12px 24px;
+  font-size: 1rem;
+  background: linear-gradient(90deg, #666aff, #8184ff);
+  border: none;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s;
+}
+
+.cta-button:hover {
+  transform: scale(1.05);
+  opacity: 0.95;
+}

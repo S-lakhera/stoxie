@@ -1,0 +1,123 @@
+/* Dashboard.css */
+
+.dashboard-wrapper {
+  background: linear-gradient(-225deg, #000000 0%, #5535a7 51%, #3071d280 100%);
+  color: white;
+  min-height: 100vh;
+  padding: 0;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+/* 🟢 HERO SECTION */
+.hero-section {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.hero-content {
+  max-width: 800px;
+}
+
+.hero-content h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.hero-content p {
+  font-size: 1.2rem;
+  color: #ccc;
+  margin-bottom: 2rem;
+}
+
+.hero-user-details span {
+  display: block;
+  margin: 0.3rem 0;
+  color: #a0a0a0;
+  font-weight: 500;
+}
+
+/* 🟣 CHART + STOCK SECTION */
+.market-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  padding: 4rem 2rem;
+  background-color: rgba(255, 255, 255, 0.01);
+}
+
+.chart-container {
+  flex: 2;
+  min-width: 320px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  padding: 1rem;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(8px);
+}
+
+.stocklist-container {
+  flex: 1;
+  min-width: 280px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  padding: 1rem;
+  max-height: 500px;
+  overflow-y: auto;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(8px);
+  scroll-behavior: unset;
+  overflow-y: visible;
+  scrollbar-width: none ;
+}
+
+/* STOCK LIST CARDS */
+.stocklist-container ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.stocklist-container li {
+  background: #1c1c1c;
+  padding: 1rem;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.stocklist-container li:hover {
+  background: #2b2b2b;
+  transform: scale(1.02);
+}
+
+.loading-text {
+  color: white;
+  text-align: center;
+  font-size: 1.5rem;
+  margin-top: 100px;
+}
+
+.see-all-stocks {
+  text-align: center;
+  color: #aecaf4;
+  margin-top: 1.2rem;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 1.3rem;
+  transition: all 0.3s;
+}
+
+.see-all-stocks:hover {
+  color: #90c3ff;
+  text-decoration: underline;
+  font-size: 1.4rem;
+}

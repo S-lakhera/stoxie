@@ -1,0 +1,99 @@
+.watchlist-container {
+  display: flex;
+  flex-direction: column;
+  height: 87vh; /* Full height to allow internal scroll */
+  overflow: hidden;
+  background: linear-gradient(-225deg, #000000 0%, #5535a7 51%, #3071d280 100%);
+  color: white;
+}
+
+/* Sticky Header Wrapper */
+.watchlist-header-wrapper {
+  position: sticky;
+  top: 0;
+  background-color: #1a1a1a;
+  padding: 1rem 2rem;
+  z-index: 10;
+  border-bottom: 1px solid #444;
+}
+
+/* Header Content */
+.watchlist-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.watchlist-header h2 {
+  margin: 0;
+}
+
+/* Dropdown */
+.dropdown-wrapper {
+  position: relative;
+}
+
+.dropdown-btn {
+  background-color: transparent;
+  color: white;
+  border: 1px solid white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 35px;
+  right: 0;
+  background-color: #222;
+  color: white;
+  border: 1px solid #888;
+  border-radius: 5px;
+  z-index: 10;
+  padding: 5px 0;
+  width: 180px;
+}
+
+.dropdown-menu div {
+  padding: 8px 15px;
+  cursor: pointer;
+}
+
+.dropdown-menu div:hover {
+  background-color: #333;
+}
+
+/* Scrollable Stock Cards */
+.watchlist-cards {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  scrollbar-width: none;
+}
+
+/* Hide horizontal scrollbar */
+.watchlist-cards::-webkit-scrollbar {
+  height: 0px;
+}
+/* Fixed "All Stocks" button at the bottom */
+.see-all-stocks-fixed {
+  position: sticky;
+  bottom: 0;
+  background-color: #1a1a1a;
+  padding: 1rem 2rem;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  border-top: 1px solid #444;
+  z-index: 9;
+  transition: background 0.2s ease;
+}
+
+.see-all-stocks-fixed:hover {
+  background-color: #292929;
+}

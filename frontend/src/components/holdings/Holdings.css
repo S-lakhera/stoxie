@@ -1,0 +1,53 @@
+.holdings-container {
+    padding: 2rem;
+    color: #fff;
+    background: linear-gradient(-225deg, #000000 0%, #5535a7 51%, #3071d280 100%);
+    min-height: 100vh;
+  }
+  
+  .holdings-container h2 {
+    margin-bottom: 1.5rem;
+    font-size: 28px;
+    font-weight: 600;
+  }
+  
+  .holdings-table {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  .table-header,
+  .table-row {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr 1fr 1fr 1fr;
+    padding: 10px 15px;
+    border-radius: 8px;
+  }
+  
+  .table-header {
+    background-color: rgba(255, 255, 255, 0.1);
+    font-weight: bold;
+    color: #ccc;
+  }
+  
+  .table-row {
+    background-color: rgba(255, 255, 255, 0.05);
+    transition: background-color 0.3s ease;
+  }
+  
+  .table-row:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .profit {
+    color: #00b386;
+    font-weight: bold;
+  }
+  
+  .loss {
+    color: #e74c3c;
+    font-weight: bold;
+  }
+  

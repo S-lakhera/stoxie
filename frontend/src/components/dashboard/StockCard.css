@@ -1,0 +1,135 @@
+/* StockCard.css */
+
+.stock-card {
+  background-color: #1e1e2f;
+  border: 1px solid #333;
+  border-radius: 10px;
+  padding: 15px 20px;
+  margin: 10px;
+  width: 93%;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  color: #eee;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.stock-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+}
+
+.stock-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.stock-symbol {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.watch-icon {
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.watch-icon:hover {
+  transform: scale(1.2);
+}
+
+.stock-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.stock-price {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #ddd;
+}
+
+.stock-change {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* Highlight selected stock card */
+.selected-stock {
+  border: 2px solid #00ffcc5e;
+  background-color: rgba(0, 255, 204, 0.07);
+}
+
+/* Main card layout */
+.stock-card {
+  padding: 1rem;
+  /* background-color: #1e1e2f; */
+  border-radius: 8px;
+  border: 1px solid #333;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.stock-card:hover {
+  transform: scale(1.01);
+}
+
+.selected-stock {
+  border: 2px solid #b7b6e7;
+}
+
+/* Header: symbol + buttons */
+.stock-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.6rem;
+}
+
+.stock-symbol {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.stock-actions button {
+  margin-left: 8px;
+  padding: 4px 10px;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.buy-btn {
+  background-color: #2ecc71;
+  color: white;
+}
+
+.sell-btn {
+  background-color: #e74c3c;
+  color: white;
+}
+
+/* Bottom: price + change */
+.stock-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.stock-price {
+  font-size: 1rem;
+  color: #f5f5f5;
+}
+
+.stock-change {
+  font-size: 0.9rem;
+}
+

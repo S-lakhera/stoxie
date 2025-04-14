@@ -1,0 +1,58 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 15px;
+  height: 60px;
+  background: rgba(12, 14, 30, 0.593);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  z-index: 100;
+  transition: transform 0.4s ease-in-out;
+  
+}
+
+.navbar.hidden {
+  transform: translateY(-100%);
+}
+
+.navbar.visible {
+  transform: translateY(0);
+}
+
+.navbar-content {
+  width: 90%;
+  max-width: 1200px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar-logo img {
+  position: relative;
+  right: 25%;
+  height: auto;
+  width: 130px;
+  margin-top: 5px;
+  object-fit: contain;
+} 
+
+.navbar-links {
+  display: flex;
+  gap: 45px;
+}
+
+.navbar-link {
+  
+  color: #ccc;
+  font-size: 1.2rem;
+  transition: color 0.2s ease;
+}
+
+.navbar-link:hover,
+.navbar-link.active {
+  color: #aab4ff;
+}

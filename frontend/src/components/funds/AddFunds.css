@@ -1,0 +1,116 @@
+.add-funds-container {
+  padding: 2rem;
+  color: #fff;
+  background: linear-gradient(-225deg, #000000 0%, #5535a7 51%, #3071d280 100%);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.add-funds-container h2 {
+  font-size: 28px;
+  margin-bottom: 1rem;
+}
+
+.wallet-balance {
+  font-size: 20px;
+  margin-bottom: 2rem;
+  color: #90ee90;
+}
+
+.wallet-actions {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.wallet-btn {
+  padding: 10px 20px;
+  font-weight: bold;
+  font-size: 16px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.wallet-btn.add {
+  background-color: #4ade80;
+  color: #000;
+}
+
+.wallet-btn.withdraw {
+  background-color: #f87171;
+  color: #fff;
+}
+
+.wallet-btn.add:hover {
+  background-color: #22c55e;
+}
+
+.wallet-btn.withdraw:hover {
+  background-color: #dc2626;
+}
+
+.wallet-form {
+  background-color: rgba(255, 255, 255, 0.07);
+  padding: 1.5rem;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.wallet-form h4 {
+  margin-bottom: 1rem;
+  font-size: 20px;
+  text-align: center;
+}
+
+.wallet-form input {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: none;
+  margin-bottom: 1rem;
+  outline: none;
+}
+
+.wallet-form-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.wallet-form button {
+  padding: 10px;
+  font-weight: bold;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s ease;
+  width: 48%;
+}
+
+.wallet-form button[type="submit"] {
+  background-color: #60a5fa;
+  color: #fff;
+}
+
+.wallet-form .cancel-btn {
+  background-color: #9ca3af;
+  color: #000;
+}
+
+.wallet-form button:hover {
+  opacity: 0.9;
+}
+
+.success-msg {
+  margin-top: 1.5rem;
+  color: #00e676;
+  font-weight: 500;
+  font-size: 16px;
+}

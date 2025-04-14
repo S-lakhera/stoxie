@@ -1,0 +1,57 @@
+.home-navbar {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 60px;
+    background: linear-gradient(-225deg, #000000 0%, #5535a7 51%, #3071d280 100%);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+    z-index: 999;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  
+  .navbar-left .navbar-logo {
+    height: auto;
+    width: 130px;
+    margin-top: 5px;
+    object-fit: contain;
+  }
+  
+  .navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .nav-icon {
+    font-size: 22px;
+    color: #ccc;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+  
+  .nav-icon:hover {
+    color: #aab4ff;
+  }
+  
+  .profile-circle {
+    width: 38px;
+    height: 38px;
+    background-color: #aab4ff;
+    color: #000;
+    border-radius: 50%;
+    font-weight: bold;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .profile-circle:hover {
+    background-color: #ffffff;
+  }
+  

@@ -1,0 +1,28 @@
+.all-stocks-wrapper {
+    padding: 2rem;
+    background: linear-gradient(-225deg, #000000 0%, #5535a7 51%, #3071d280 100%);
+    min-height: 100vh;
+    color: white;
+  }
+  
+  .all-stocks-title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .stock-search-input {
+    width: 100%;
+    padding: 0.7rem 1rem;
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+    border-radius: 6px;
+    border: none;
+    outline: none;
+  }
+  
+  .stock-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.5rem;
+  }
+  
