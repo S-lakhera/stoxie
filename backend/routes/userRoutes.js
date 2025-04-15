@@ -1,10 +1,11 @@
 import express from "express";
 import jwt from "jsonwebtoken";
 import User from "../models/User.js"; // make sure .js extension is correct
+import Transaction from "../models/Transaction.js";
 
 const router = express.Router();
 
-// ✅ Token Middleware — defined right here itself
+
 const authenticate = (req, res, next) => {
   const authHeader = req.headers.authorization;
 
@@ -22,6 +23,22 @@ const authenticate = (req, res, next) => {
     return res.status(401).json({ message: "Invalid or expired token" });
   }
 };
+
+// Add this new endpoint
+router.get('/transactions/:userId', async (req, res) => {
+  try {
+    const transactions = await Transaction.find({
+      userId: req.params.userId,
+      type: { $in: ['add', 'withdraw'] } // Only get fund-related transactions
+    })
+    .sort({ date: -1 }) // Newest first
+    .limit(50); // Limit to 50 most recent
+
+    res.json(transactions);
+  } catch (err) {
+    res.status(500).json({ message: 'Failed to fetch transactions', error: err.message });
+  }
+});
 
 // ✅ GET current user
 router.get("/me", authenticate, async (req, res) => {

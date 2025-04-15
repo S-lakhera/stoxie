@@ -6,7 +6,6 @@ import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
 import StockChart from './StockChart';
-import StockList from './StockList';
 import WatchList from './WatchList';
 
 
@@ -59,7 +58,7 @@ const Dashboard = () => {
       {/* 👋 Full View Welcome Section */}
       <section className="hero-section">
         <div className="hero-content">
-          <h1>Welcome back, {user.firstName} 👋</h1>
+          <h1>Welcome, {user.firstName} </h1>
           <p>Your personalized stock dashboard awaits.</p>
           <div className="hero-user-details">
             <span>Email: {user.email}</span>
@@ -68,8 +67,6 @@ const Dashboard = () => {
           </div>
         </div>
       </section>
-
-     
     </div> 
   );
 };

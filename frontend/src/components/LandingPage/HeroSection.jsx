@@ -15,7 +15,7 @@ const HeroSection = () => {
         <button className="cta-button" onClick={() => navigate('/signup')}>
           Create Your Free Account Today
         </button>
-      </div>
+      </div> 
     </section>
   );
 };

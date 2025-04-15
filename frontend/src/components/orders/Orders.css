@@ -3,6 +3,7 @@
   color: #fff;
   background: linear-gradient(-225deg, #000000 0%, #5535a7 51%, #3071d280 100%);
   min-height: 100vh;
+  text-align: center;
 }
 
 .orders-container h2 {
@@ -114,4 +115,96 @@
   color: #e74c3c;
   text-align: center;
   margin-top: 2rem;
+}
+/* Pagination Styles */
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.pagination-controls button {
+  padding: 8px 16px;
+  background-color: #f0f0f0;
+  color: #333;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.pagination-controls button:hover:not(:disabled) {
+  background-color: #4CAF50;
+  color: white;
+  border-color: #4CAF50;
+}
+
+.pagination-controls button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pagination-controls button.active {
+  background-color: #4CAF50;
+  color: white;
+  border-color: #4CAF50;
+}
+
+.page-numbers {
+  display: flex;
+  gap: 5px;
+}
+
+/* Status Badge Improvements */
+.status-container {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.status-badge {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  text-transform: capitalize;
+}
+
+.status-pending {
+  background-color: #FFF3CD;
+  color: #856404;
+}
+
+.status-filled {
+  background-color: #D4EDDA;
+  color: #155724;
+}
+
+.status-rejected {
+  background-color: #F8D7DA;
+  color: #721C24;
+}
+
+.rejection-tooltip {
+  cursor: help;
+  color: #721C24;
+  font-size: 0.9em;
+  position: relative;
+}
+
+.rejection-tooltip:hover::after {
+  content: attr(title);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #333;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  z-index: 10;
 }

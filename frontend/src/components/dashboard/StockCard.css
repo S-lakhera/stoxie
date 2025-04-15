@@ -31,7 +31,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 4rem;
+  gap: 2rem;
   margin-bottom: 0.6rem;
 }
 
@@ -54,17 +54,17 @@
 }
 
 .buy-btn {
-  background-color: #2ecc71;
+  background-color: #2ecc7097;
   color: white;
 }
 
 .sell-btn {
-  background-color: #e74c3c;
+  background-color: #e74d3c94;
   color: white;
 }
 
 /* Bottom section */
-.stock-bottom {
+.stock-bottom,.stock-top {
   display: flex;
   justify-content: space-between;
   align-items: center;

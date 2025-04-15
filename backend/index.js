@@ -26,7 +26,7 @@ app.use('/api/stocks', stockRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/transaction', transactionRoutes);
 app.use('/api/holdings', holdingRoutes);
-
+ 
 
 connectDB();
 

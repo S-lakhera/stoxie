@@ -12,7 +12,7 @@ const StockCard = ({ data, onClick, selected }) => {
   const color = isPositive ? 'limegreen' : data?.change < 0 ? 'tomato' : 'gray';
   const formattedChange = `${isPositive ? '+' : ''}${Number(data?.change || 0).toFixed(2)}`;
   const formattedPercent = `${isPositive ? '+' : ''}${Number(data?.percent || 0).toFixed(2)}%`;
- 
+  
   const [transactionType, setTransactionType] = useState('buy'); // New state
 
 

@@ -40,7 +40,47 @@ const BuySellModal = ({ stockSymbol, stockPrice, closeModal, userBalance, transa
     }
   
     try {
+      // First check holdings if it's a sell order
+      if (transactionType === 'sell') {
+        const holdingsResponse = await axios.get(`http://localhost:5000/api/holdings/${userId}`);
+        const stockHolding = holdingsResponse.data.find(h => h.symbol === stockSymbol);
+        
+        if (!stockHolding) {
+          // Create a rejected order
+          await axios.post('http://localhost:5000/api/transaction', {
+            userId,
+            type: 'sell',
+            stockSymbol,
+            quantity: q,
+            price: stockPrice,
+            total,
+            status: 'rejected',
+            rejectionReason: 'Stock not in holdings'
+          });
+          toast.error(`You don't own ${stockSymbol} in your holdings`);
+          closeModal();
+          return;
+        }
+        
+        if (q > stockHolding.quantity) {
+          // Create a rejected order
+          await axios.post('http://localhost:5000/api/transaction', {
+            userId,
+            type: 'sell',
+            stockSymbol,
+            quantity: q,
+            price: stockPrice,
+            total,
+            status: 'rejected',
+            rejectionReason: 'Insufficient quantity'
+          });
+          toast.error(`You only have ${stockHolding.quantity} shares of ${stockSymbol}`);
+          closeModal();
+          return;
+        }
+      }
   
+      // Proceed with normal transaction if validation passes
       const response = await axios.post('http://localhost:5000/api/transaction', {
         userId,
         type: transactionType,
@@ -48,15 +88,12 @@ const BuySellModal = ({ stockSymbol, stockPrice, closeModal, userBalance, transa
         quantity: q,
         price: stockPrice,
         total,
-        status : "pending"
+        status: "pending" // Will be updated to completed by backend if successful
       });
-  
-      // console.log('Transaction response:', response.data);
   
       toast.success(`Successfully ${transactionType === 'buy' ? 'bought' : 'sold'} ${q} ${stockSymbol} shares!`);
   
       if (onTransactionSuccess) {
-        // Fallback calculation if backend doesn't return balance
         const updatedBalance = response.data.newBalance ?? 
           (transactionType === 'buy' 
             ? userBalance - total 
@@ -69,6 +106,7 @@ const BuySellModal = ({ stockSymbol, stockPrice, closeModal, userBalance, transa
     } catch (err) {
       console.error('Transaction error:', err.response?.data || err.message);
       toast.error(err.response?.data?.message || 'Transaction failed. Try again.');
+      closeModal()
     }
   };
   

@@ -3,6 +3,7 @@
     color: #fff;
     background: linear-gradient(-225deg, #000000 0%, #5535a7 51%, #3071d280 100%);
     min-height: 100vh;
+    text-align: center;
   }
   
   .holdings-container h2 {
@@ -69,4 +70,23 @@
     color: #e74c3c;
     text-align: center;
     margin-top: 2rem;
+  }
+  .sell-btn {
+    background-color: rgba(231, 76, 60, 0.1);
+    color: #e74d3c99;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  .sell-btn:hover {
+    background-color: rgba(231, 76, 60, 0.2);
+  }
+  
+  /* Ensure table layout accommodates new column */
+  .table-header,
+  .table-row {
+    grid-template-columns: 1fr 2fr 1fr 1fr 1fr 1fr 0.5fr; /* Added one more column */
   }

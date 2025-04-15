@@ -4,17 +4,24 @@
   
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* 👈 pehle center tha */
+  justify-content: flex-start; 
   align-items: center;
   color: white;
   text-align: center;
-  padding: 0 50px;
+  padding: 0 100px;
+}
+
+.hero-content{
+  height: 90%;
+  width: auto;
+  margin-bottom: 10%;
 }
 
 .hero-content {
   animation: fadeSlideIn 1.2s ease-out forwards;
   opacity: 0;
   transform: translateY(40px);
+
 }
 
 @keyframes fadeSlideIn {
@@ -27,7 +34,7 @@
 .hero-logo {
   width: 300px;
   height: 280px;
-  margin-top: -20px; /* 👈 thoda kam kiya niche se */
+  margin-top: -20px; 
   animation: popIn 0.8s ease-in-out;
 }
 
@@ -42,23 +49,6 @@
   }
 }
 
-/* .hero-title {
-  font-size: 3.5rem;
-  font-weight: bold;
-  color: #fff;
-  margin-bottom: 15px;
-  letter-spacing: 10px;
-  animation: glow 2s infinite alternate;
-} */
-
-/* @keyframes glow {
-  0% {
-    text-shadow: 0 0 5px #8d9bff, 0 0 10px #8d9bff;
-  }
-  100% {
-    text-shadow: 0 0 15px #aab4ff, 0 0 30px #aab4ff;
-  }
-} */
 
 .hero-tagline {
   font-size: 1.2rem;
