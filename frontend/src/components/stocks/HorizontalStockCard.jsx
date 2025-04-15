@@ -53,7 +53,9 @@ const HorizontalStockCard = ({ data, isWatched, toggleWatch, onClick }) => {
           onClick={(e) => {
             e.stopPropagation();
             toggleWatch();
+            
           }}
+          title='Add to WatchList'
         >
           {isWatched ? '★' : '☆'}
         </span>
