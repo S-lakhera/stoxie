@@ -126,7 +126,7 @@ const BuySellModal = ({ stockSymbol, stockPrice, closeModal, userBalance, transa
           </div>
 
           <div className="modal-subinfo">
-            <p><strong>Current Price:</strong> ${stockPrice}</p>
+            <p style={{marginBottom:"20px"}} ><strong>Current Price:</strong> ${stockPrice}</p> 
             <p><strong>Available Balance:</strong> ${userBalance.toFixed(2)}</p>
           </div>
 
