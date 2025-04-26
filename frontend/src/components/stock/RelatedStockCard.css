@@ -1,0 +1,57 @@
+.related-stock-card {
+    background-color: #1e1e2f;
+    border: 1px solid #333;
+    border-radius: 10px;
+    padding: 0.7rem;
+    margin: 1px 5px;
+    width: 100%;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+    color: #eee;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .related-stock-card:hover {
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+  }
+  
+  /* Selected state */
+  .selected-stock {
+    border: 2px solid #00ffcc5e;
+    background-color: rgba(0, 255, 204, 0.07);
+  }
+  
+  /* Header section */
+  .stock-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.6rem;
+  }
+  
+  .stock-symbol {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fff;
+  }
+  
+  /* Bottom section */
+  .stock-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .stock-price {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #f5f5f5;
+  }
+  
+  .stock-change {
+    font-size: 0.8rem;
+    font-weight: 500;
+  }

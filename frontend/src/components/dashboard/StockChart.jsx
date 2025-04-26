@@ -9,15 +9,15 @@ const StockChart = ({ symbol = "AAPL" }) => {
   useEffect(() => {
     const fetchQuote = async () => {
       try {
-        const res = await axios.get(`https://finnhub.io/api/v1/quote?symbol=${symbol}&token=cvrscjpr01qnpem9e2rgcvrscjpr01qnpem9e2s0`);
-        setQuote(res.data);
+        const res = await axios.get(`http://localhost:5000/api/stocks/price/${symbol}`);
+        setQuote(res.data); 
       } catch (err) {
-        console.error('Error fetching quote:', err);
+        console.error('Error fetching quote:', err.message);
       }
     };
 
     fetchQuote();
-    const interval = setInterval(fetchQuote, 10000); // poll every 10 sec
+    const interval = setInterval(fetchQuote, 10000); // poll every 10 sec (10000ms)
 
     return () => clearInterval(interval);
   }, [symbol]);

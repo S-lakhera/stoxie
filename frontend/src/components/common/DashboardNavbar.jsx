@@ -32,8 +32,8 @@ const DashboardNavbar = () => {
 
     fetchBalance();
 
-    // Optional: Set up interval for real-time updates (every 30 seconds)
-    const intervalId = setInterval(fetchBalance, 30000);
+    // Optional: Set up interval for real-time updates (every 10 seconds)
+    const intervalId = setInterval(fetchBalance, 10000);
     
     return () => clearInterval(intervalId);
   }, [user?._id]);
@@ -59,14 +59,14 @@ const DashboardNavbar = () => {
         <NavLink to="/dashboard/orders" className="nav-link">Orders</NavLink>
         <NavLink to="/dashboard/holdings" className="nav-link">Holdings</NavLink>
         <NavLink to="/dashboard/positions" className="nav-link">Positions</NavLink>
-        <NavLink to="/dashboard/funds" className="nav-link" title="Wallet">
+        {/* <NavLink to="/dashboard/funds" className="nav-link" title="Wallet">
           <i className="fas fa-wallet"></i>
-        </NavLink>
+        </NavLink> */}
 
         {/* Updated Balance Display */}
-        <div className="navbar-funds" title="Available Balance">
+        <NavLink to={"/dashboard/funds"} style={{textDecoration:"none"}} className="navbar-funds" title="Available Balance">
           ${balance.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-        </div>
+        </NavLink>
  
         {/* Profile Icon */}
         <div className="profile-circle" onClick={handleProfileClick} title="Profile">

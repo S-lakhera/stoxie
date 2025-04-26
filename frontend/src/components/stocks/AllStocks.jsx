@@ -1,4 +1,3 @@
-// components/stocks/AllStocks.jsx
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './AllStocks.css';
@@ -11,59 +10,62 @@ const stockSymbols = [
   "ADBE", "PFE", "INTC", "T", "ORCL", "DIS", "CVX"
 ];
 
+const fetchStockData = async (symbol, retries = 3) => {
+  try {
+    const encoded = encodeURIComponent(symbol);
+    const response = await axios.get(`http://localhost:5000/api/stocks/price/${encoded}`);
+    return {
+      symbol,
+      price: response.data.current,
+      name: response.data.name || `${symbol} Inc.`,
+      change: Number((Math.random() * 10 - 5).toFixed(2)),
+      percent: Number((Math.random() * 2 - 1).toFixed(2)),
+    };
+  } catch (error) {
+    if (retries > 0) {
+      await new Promise(resolve => setTimeout(resolve, 200));
+      return fetchStockData(symbol, retries - 1);
+    }
+    console.error(`Failed to fetch ${symbol}:`, error);
+    return null;
+  }
+};
+
 const AllStocks = () => {
   const [search, setSearch] = useState('');
   const [stocksData, setStocksData] = useState([]);
-  const [watchlist, setWatchlist] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [visibleCount, setVisibleCount] = useState(6);
+  const [watchlists, setWatchlists] = useState({
+    default: ["AAPL", "MSFT", "AMZN", "GOOGL", "META", "TSLA", "NVDA", "NFLX"],
+    'Watchlist 1': JSON.parse(localStorage.getItem('watchlist1')) || []
+  });
   const navigate = useNavigate();
 
+  const loadStocks = async (start, count) => {
+    const batch = stockSymbols.slice(start, start + count);
+    const batchResults = await Promise.all(batch.map(fetchStockData));
+    setStocksData(prev => [...prev, ...batchResults.filter(Boolean)]);
+  };
+
   useEffect(() => {
-    const fetchStocks = async () => {
-      try {
-        const responses = await Promise.all(
-          stockSymbols.map(async (symbol) => {
-            const encoded = encodeURIComponent(symbol);
-            const res = await axios.get(`http://localhost:5000/api/stocks/price/${encoded}`);
-            return {
-              symbol,
-              price: res.data.current,
-              name: symbol + " Inc.",
-              change: Number((Math.random() * 10 - 5).toFixed(2)),
-              percent: Number((Math.random() * 2 - 1).toFixed(2)),
-            };
-          })
-        );
-        setStocksData(responses);
-
-        // 🆕 Load Watchlist 1 from localStorage
-        const saved = JSON.parse(localStorage.getItem('watchlist1')) || [];
-        setWatchlist(saved);
-      } catch (err) {
-        console.error("Error fetching stock data", err);
-      }
+    const initLoad = async () => {
+      setLoading(true);
+      await loadStocks(0, 6);
+      setLoading(false);
     };
-
-    fetchStocks();
+    initLoad();
   }, []);
 
-  // 🆕 Add or remove from Watchlist 1
-  const toggleWatchlist = (symbol) => {
-    const stored = JSON.parse(localStorage.getItem('watchlist1')) || [];
-
-    let updated;
-    if (stored.includes(symbol)) {
-      updated = stored.filter(s => s !== symbol);
-    } else {
-      updated = [...stored, symbol];
-    }
-
-    localStorage.setItem('watchlist1', JSON.stringify(updated));
-    setWatchlist(updated);
+  const handleLoadMore = async () => {
+    setLoading(true);
+    await loadStocks(stocksData.length, 6);
+    setVisibleCount(prev => prev + 6);
+    setLoading(false);
   };
 
   const filtered = stocksData.filter(stock =>
-    stock.symbol.toLowerCase().includes(search.toLowerCase())
+    stock?.symbol?.toLowerCase().includes(search.toLowerCase())
   );
 
   const visibleStocks = filtered.slice(0, visibleCount);
@@ -84,36 +86,33 @@ const AllStocks = () => {
         </div>
       </div>
 
+      {loading && stocksData.length === 0 ? (
+        <div className="loading-spinner"></div>
+      ) : (
+        <>
+          <div className="stock-list">
+            {visibleStocks.map(stock => (
+              <HorizontalStockCard
+                key={stock.symbol}
+                data={stock}
+                isWatched={watchlists['Watchlist 1'].includes(stock.symbol)}
+                toggleWatch={() => toggleWatchlist(stock.symbol)}
+                onClick={() => navigate(`/dashboard/stocks/${stock.symbol}`)}
+              />
+            ))}
+          </div>
 
-      <div className="stock-list">
-        {visibleStocks.map(stock => (
-          <HorizontalStockCard
-            key={stock.symbol}
-            data={stock}
-            isWatched={watchlist.includes(stock.symbol)}
-            toggleWatch={() => toggleWatchlist(stock.symbol)}
-            onClick={() => navigate(`/stock/${stock.symbol}`)}
-          />
-        ))}
-      </div>
-
-      {visibleCount < filtered.length && (
-        <div style={{ textAlign: 'center', marginTop: '1.5rem' }}>
-          <button
-            style={{
-              padding: '0.7rem 1.5rem',
-              fontSize: '1rem',
-              borderRadius: '8px',
-              border: 'none',
-              backgroundColor: '#5535a7',
-              color: 'white',
-              cursor: 'pointer'
-            }}
-            onClick={() => setVisibleCount(prev => prev + 6)}
-          >
-            Load More
-          </button>
-        </div>
+          {visibleCount < filtered.length && (
+            <div className="load-more-container">
+              <button
+                className="load-more-btn"
+                onClick={handleLoadMore}
+              >
+                Load More
+              </button>
+            </div>
+          )}
+        </>
       )}
     </div>
   );

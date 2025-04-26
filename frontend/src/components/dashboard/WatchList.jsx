@@ -1,41 +1,62 @@
+// components/WatchList.js
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './WatchList.css';
 import StockCard from './StockCard';
 
-const defaultWatchlist = [
-  "AAPL", "MSFT", "AMZN", "GOOGL", "META", "TSLA", "NVDA", "NFLX"
-];
-
 const WatchList = ({ onSelect, selectedSymbol }) => {
   const [watchlists, setWatchlists] = useState({
-    default: defaultWatchlist,
-    'Watchlist 1': [],
+  default: ["AAPL", "MSFT", "AMZN", "GOOGL", "META", "TSLA", "NVDA", "NFLX"],
+    'Watchlist 1': JSON.parse(localStorage.getItem('watchlist1')) || []
   });
   const [stocksData, setStocksData] = useState([]);
   const [selectedList, setSelectedList] = useState('default');
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const navigate = useNavigate();
- 
+
   const fetchData = async () => {
     try {
       const symbols = watchlists[selectedList] || [];
+      
+      // Add small delay to prevent API flooding
+      await new Promise(resolve => setTimeout(resolve, 200));
+      
       const responses = await Promise.all(
         symbols.map(async (symbol) => {
-          const encoded = encodeURIComponent(symbol);
-          const res = await fetch(`http://localhost:5000/api/stocks/price/${encoded}`);
-          const data = await res.json();
-          return {
-            symbol,
-            price: data.current,
-            change: Number((Math.random() * 10 - 5).toFixed(2)),
-            percent: Number((Math.random() * 2 - 1).toFixed(2)),
-          };
+          try {
+            const encoded = encodeURIComponent(symbol);
+            const res = await fetch(`http://localhost:5000/api/stocks/price/${encoded}`);
+            
+            if (!res.ok) {
+              throw new Error(`Failed to fetch ${symbol} (Status: ${res.status})`);
+            }
+            
+            const data = await res.json();
+            return {
+              symbol,
+              price: data.current,
+              name: data.name || `${symbol} Stock`, // Fallback name
+              change: Number((Math.random() * 10 - 5).toFixed(2)),
+              percent: Number((Math.random() * 2 - 1).toFixed(2)),
+            };
+          } catch (error) {
+            console.error(`Error fetching ${symbol}:`, error);
+            return {
+              symbol,
+              price: 0,
+              name: `${symbol} (Unavailable)`,
+              change: 0,
+              percent: 0,
+              error: true
+            };
+          }
         })
       );
-      setStocksData(responses);
+      
+      setStocksData(responses.filter(stock => !stock.error));
     } catch (err) {
       console.error('Failed to load watchlist data:', err);
+      // Optionally set some error state here
     }
   };
 
@@ -54,6 +75,23 @@ const WatchList = ({ onSelect, selectedSymbol }) => {
     } else {
       setSelectedList(value);
     }
+  };
+
+  const toggleWatch = (symbol) => {
+    setWatchlists(prev => {
+      const currentList = prev['Watchlist 1'] || [];
+      const exists = currentList.includes(symbol);
+      const updatedList = exists
+        ? currentList.filter(s => s !== symbol)
+        : [...currentList, symbol];
+      
+      localStorage.setItem('watchlist1', JSON.stringify(updatedList));
+      
+      return {
+        ...prev,
+        'Watchlist 1': updatedList
+      };
+    });
   };
 
   return (
@@ -85,24 +123,14 @@ const WatchList = ({ onSelect, selectedSymbol }) => {
           <StockCard 
             key={stock.symbol}
             data={stock}
-            isWatched={watchlists[selectedList]?.includes(stock.symbol)}
-            toggleWatch={() => {
-              setWatchlists(prev => {
-                const currentList = prev[selectedList] || [];
-                const exists = currentList.includes(stock.symbol);
-                const updatedList = exists
-                  ? currentList.filter(sym => sym !== stock.symbol)
-                  : [...currentList, stock.symbol];
-                return { ...prev, [selectedList]: updatedList };
-              });
-            }}
+            isWatched={watchlists['Watchlist 1'].includes(stock.symbol)}
+            toggleWatch={() => toggleWatch(stock.symbol)}
             selected={stock.symbol === selectedSymbol}
             onClick={() => onSelect(stock.symbol)}
           />
         ))}
       </div>
 
-      {/* ✅ Fixed "All Stocks" button at bottom */}
       <div className="see-all-stocks-fixed" onClick={() => navigate('/dashboard/stocks')}>
         All Stocks
       </div>

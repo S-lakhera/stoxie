@@ -18,7 +18,7 @@ import Orders from './components/orders/Orders';
 import Holdings from './components/holdings/Holdings'
 import AddFunds from './components/funds/AddFunds';
 import AllStocks from './components/stocks/AllStocks';
-import SingleStockPage from './components/stocks/SingleStock';
+import StockPage from './components/stock/StockPage';
 
 
 
@@ -66,7 +66,7 @@ function App() {
           <Route path="holdings" element={<Holdings />} />
           <Route path="funds" element={<AddFunds />} />
           <Route path="stocks" element={<AllStocks />} />
-          <Route path="stock/:symbol" element={<SingleStockPage />} />  // dummy for now
+          <Route path="stocks/:symbol" element={<StockPage />} />
 
 
         </Route>

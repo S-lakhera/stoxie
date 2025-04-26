@@ -88,9 +88,8 @@
 .see-all-stocks-fixed {
   position: sticky;
   bottom: 0;
-  background-color: #1a1a1a;
   background: linear-gradient(-225deg, #00000090 0%, #5535a7 51%, #3071d280 100%);
-  padding: 1rem 2rem;
+  padding: 0.6rem 1rem;
   text-align: center;
   color: white;
   font-weight: bold;

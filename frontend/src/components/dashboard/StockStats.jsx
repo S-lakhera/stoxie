@@ -2,16 +2,22 @@ import React from 'react';
 import './StockStats.css';
 
 const StockStats = ({ quote }) => {
-  if (!quote) return <p>Loading stats...</p>;
+  if (!quote) {
+    return (
+      <div className="loading-spinner-container">
+        <div className="loading-spinner"></div>
+      </div>
+    );
+  }
 
   const data = [
-    { label: "Current", value: quote.c },
-    { label: "Open", value: quote.o },
-    { label: "High", value: quote.h },
-    { label: "Low", value: quote.l },
-    { label: "Prev Close", value: quote.pc },
+    { label: "Current", value: quote.current },
+    { label: "Open", value: quote.open },
+    { label: "High", value: quote.high },
+    { label: "Low", value: quote.low },
+    { label: "Prev Close", value: quote.previousClose },
   ];
- 
+
   return (
     <div className="stock-stats-container">
       {data.map((item, idx) => (

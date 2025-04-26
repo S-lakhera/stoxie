@@ -1,3 +1,4 @@
+//components/dashboard/StockGraph.jsx
 import React, { useEffect, useState } from 'react';
 import { Line } from 'react-chartjs-2';
 import axios from 'axios';
@@ -18,7 +19,6 @@ const intervals = {
     '1h': { interval: '1h', outputsize: 20 },
     '1day': { interval: '1day', outputsize: 30 },
     '1week': { interval: '1week', outputsize: 52 },
-    '1month': { interval: '1month', outputsize: 50 },
   };
   
 
@@ -38,7 +38,7 @@ const StockGraph = ({ symbol }) => {
           data: values.map(v => parseFloat(v.close)),
           borderColor: '#4cc9f0',
           tension: 0.3,
-          fill: false,
+          fill: false, 
         }]
       };
       setChartData(data);

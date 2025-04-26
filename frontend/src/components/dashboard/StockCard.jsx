@@ -44,7 +44,7 @@ const handleSellClick = (e) => {
           <button className="sell-btn" onClick={handleSellClick}>S</button> {/* Sell button */}
         </div>
       </div>
-
+ 
       <div className="stock-bottom">
         <span className="stock-price">${Number(data?.price || 0).toFixed(2)}</span>
         <span className="stock-change" style={{ color }}>
