@@ -1,5 +1,5 @@
 import React from 'react';
-import './support.css';
+import './Support.css';
 import supportImage from '../../assets/supportImage.jpg'; // Replace with your own image
 
 const Support = () => {
