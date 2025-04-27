@@ -4,7 +4,8 @@ import react from '@vitejs/plugin-react'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-  define: {
-    'process.env': process.env, // This ensures process.env is accessible
+  server: {
+    port: process.env.PORT || 10000, // Port that Render gives you (or any valid port for local dev)
+    host: '0.0.0.0', // Make sure it's set to '0.0.0.0' to be publicly accessible
   },
 })
