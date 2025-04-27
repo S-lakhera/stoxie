@@ -3,7 +3,7 @@ import './AllStocks.css';
 import { useNavigate } from 'react-router-dom';
 import HorizontalStockCard from './HorizontalStockCard';
 import API from '../../api/axios';
-
+ 
 const stockSymbols = [
   "AAPL", "MSFT", "AMZN", "GOOGL", "META", "TSLA", "NVDA", "BRK.B", "JPM", "NFLX", "LLY",
   "V", "XOM", "UNH", "MA", "COST", "WMT", "HD", "PG", "PEP", "BAC", "AVGO", "KO", "MRK",
@@ -51,7 +51,7 @@ const AllStocks = () => {
   useEffect(() => {
     const initLoad = async () => {
       setLoading(true);
-      await loadStocks(0, 6);
+      await loadStocks(0, 7);
       setLoading(false);
     };
     initLoad();
