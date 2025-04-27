@@ -1,7 +1,7 @@
 import React from 'react';
 import HeroSection from './HeroSection';
 import TeamSection from './TeamSection';
-import './about.css';
+import './About.css';
 
 const About = () => {
   return (
