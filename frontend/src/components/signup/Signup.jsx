@@ -1,12 +1,12 @@
-// Signup.jsx
 import React, { useState } from 'react';
 import { FaUserShield, FaChartLine, FaLock } from 'react-icons/fa';
 import './Signup.css';
-import logo from '../../assets/logo.png';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext'; // ✅
+import { showSuccess, showError } from '../../utils/toastHandler';
+import API from '../../api/axios'; // ✅ Import the API instance
 
 const Signup = () => {
   const [step, setStep] = useState(1);
@@ -23,7 +23,7 @@ const Signup = () => {
     contact: '',
     altEmail: '',
   });
-
+ 
   const handleChange = (e) => {
     setFormData((prev) => ({
       ...prev,
@@ -34,7 +34,7 @@ const Signup = () => {
   const handleNext = () => {
     const { username, email, password } = formData;
     if (!username || !email || !password) {
-      toast.error('Please fill in all required fields before continuing.');
+      showError('Please fill in all required fields before continuing.');
       return;
     }
     setStep(2);
@@ -47,31 +47,30 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch('http://localhost:5000/api/auth/signup', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      });
+      // Use the API instance to send the POST request
+      const res = await API.post('/api/auth/signup', formData);
 
-      const data = await res.json();
+      const { user, token } = res.data; // ✅ token bhi destructure kar
 
-      if (res.ok) {
-        toast.success('Signup successful!');
-      
-        const { user, token } = data;
-      
-        localStorage.setItem("stoxieUser", JSON.stringify({ ...user, token }));
-        login({ ...user, token });
-      
-        setTimeout(() => {
-          navigate('/dashboard');
-        }, 1500);
-      }
-      else {
-        toast.error(data.message || 'Signup failed. Try again.');
-      }
+      localStorage.setItem("stoxieUser", JSON.stringify({ ...user, token })); // ✅ token bhi save ho raha
+      login({ ...user, token }); // ✅ context me bhi bhej token
+
+      showSuccess("Signup successful!");
+
+      setTimeout(() => {
+        navigate('/dashboard');
+      }, 1500);
+
     } catch (error) {
-      toast.error('Error registering user. Please try again.');
+      const serverMessage = error.response?.data?.message?.toLowerCase();
+
+      if (serverMessage?.includes('already') || serverMessage?.includes('exists')) {
+        showError("This email is already registered.");
+      } else if (serverMessage) {
+        showError(serverMessage);
+      } else {
+        showError("Signup failed. Please try again.");
+      }
     }
   };
 

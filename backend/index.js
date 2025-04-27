@@ -11,7 +11,7 @@ import transactionRoutes from './routes/transactionRoutes.js';
 import holdingRoutes from './routes/holdingRoutes.js'
 import { clearCache } from './utils/cache.js';
 import { updatePopularStockPrices } from './jobs/stockPriceUpdater.js';
-
+import stockGraphRoutes from './routes/stockGraph.js'
 
 
 clearCache();
@@ -29,6 +29,7 @@ app.use('/api/stocks', stockRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/transaction', transactionRoutes);
 app.use('/api/holdings', holdingRoutes);
+app.use('/api/stockgraph',stockGraphRoutes)
  
 
 setInterval(updatePopularStockPrices, 30 * 1000); // update every 30s

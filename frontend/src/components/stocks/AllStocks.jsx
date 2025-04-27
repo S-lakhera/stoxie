@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import './AllStocks.css';
 import { useNavigate } from 'react-router-dom';
 import HorizontalStockCard from './HorizontalStockCard';
+import API from '../../api/axios';
 
 const stockSymbols = [
   "AAPL", "MSFT", "AMZN", "GOOGL", "META", "TSLA", "NVDA", "BRK.B", "JPM", "NFLX", "LLY",
@@ -13,7 +13,7 @@ const stockSymbols = [
 const fetchStockData = async (symbol, retries = 3) => {
   try {
     const encoded = encodeURIComponent(symbol);
-    const response = await axios.get(`http://localhost:5000/api/stocks/price/${encoded}`);
+    const response = await API.get(`/api/stocks/price/${encoded}`);
     return {
       symbol,
       price: response.data.current,

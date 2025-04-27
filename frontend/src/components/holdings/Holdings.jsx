@@ -3,6 +3,7 @@ import axios from 'axios';
 import './Holdings.css';
 import { useAuth } from '../../context/AuthContext';
 import BuySellModal from '../trade/BuySellModal';
+import API from '../../api/axios';
 
 const Holdings = () => {
   const { user, updateBalance } = useAuth();
@@ -17,7 +18,7 @@ const Holdings = () => {
   const fetchHoldings = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(`http://localhost:5000/api/holdings/${user._id}`);
+      const response = await API.get(`/api/holdings/${user._id}`);
       
       const holdingsWithPL = response.data.map(holding => ({
         ...holding,

@@ -22,7 +22,6 @@ import StockPage from './components/stock/StockPage';
 
 
 
-
 function App() {
   return (
     <Router>
@@ -81,7 +80,7 @@ function App() {
             </PrivateRoute>
           }
         />
-
+        
           
       </Routes>
     </Router>

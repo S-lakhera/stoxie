@@ -1,12 +1,12 @@
-// components/WatchList.js
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './WatchList.css';
 import StockCard from './StockCard';
+import API from '../../api/axios'; // Import your Axios instance
 
 const WatchList = ({ onSelect, selectedSymbol }) => {
   const [watchlists, setWatchlists] = useState({
-  default: ["AAPL", "MSFT", "AMZN", "GOOGL", "META", "TSLA", "NVDA", "NFLX"],
+    default: ["AAPL", "MSFT", "AMZN", "GOOGL", "META", "TSLA", "NVDA", "NFLX"],
     'Watchlist 1': JSON.parse(localStorage.getItem('watchlist1')) || []
   });
   const [stocksData, setStocksData] = useState([]);
@@ -25,17 +25,18 @@ const WatchList = ({ onSelect, selectedSymbol }) => {
         symbols.map(async (symbol) => {
           try {
             const encoded = encodeURIComponent(symbol);
-            const res = await fetch(`http://localhost:5000/api/stocks/price/${encoded}`);
             
-            if (!res.ok) {
-              throw new Error(`Failed to fetch ${symbol} (Status: ${res.status})`);
+            // Use the API Axios instance to make the request
+            const res = await API.get(`/api/stocks/price/${encoded}`); // Using the API instance
+            
+            if (!res.data) {
+              throw new Error(`Failed to fetch ${symbol}`);
             }
             
-            const data = await res.json();
             return {
               symbol,
-              price: data.current,
-              name: data.name || `${symbol} Stock`, // Fallback name
+              price: res.data.current,
+              name: res.data.name || `${symbol} Stock`, // Fallback name
               change: Number((Math.random() * 10 - 5).toFixed(2)),
               percent: Number((Math.random() * 2 - 1).toFixed(2)),
             };

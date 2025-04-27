@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import axios from 'axios';
-import { toast } from 'react-toastify';
+import { showSuccess, showError } from '../../utils/toastHandler';
 import 'react-toastify/dist/ReactToastify.css';
 import './Orders.css';
+import API from '../../api/axios';
 
 const Orders = () => {
   const { user } = useAuth();
@@ -22,8 +23,8 @@ const Orders = () => {
 
     try {
       setLoading(true);
-      const response = await axios.get(
-        `http://localhost:5000/api/transaction/${user._id}?page=${page}&limit=${limit}`
+      const response = await API.get(
+        `/api/transaction/${user._id}?page=${page}&limit=${limit}`
       );
       
       setOrders(response.data.orders);
@@ -32,7 +33,7 @@ const Orders = () => {
     } catch (err) {
       console.error("Failed to fetch orders:", err);
       setError('Failed to load orders. Please try again.');
-      toast.error('Failed to load orders');
+      showError('Failed to load orders');
     } finally {
       setLoading(false);
     }

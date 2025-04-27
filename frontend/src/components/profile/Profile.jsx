@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import "./Profile.css";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-import { toast } from "react-toastify";
+import { showSuccess, showError } from '../../utils/toastHandler'; 
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const Profile = () => {
   const { user, logout } = useAuth();
@@ -21,7 +23,7 @@ const Profile = () => {
 
   const handleLogout = () => {
     logout();
-    toast.success("Logged out successfully!");
+    showSuccess("Logged out successfully!");
     navigate("/");
   };
 
@@ -40,7 +42,7 @@ const Profile = () => {
   const handleSave = () => {
     // Here you would make an API call to save the updated data
     // Currently just showing a success toast
-    toast.success("Profile updated successfully!");
+    showSuccess("Profile updated successfully!");
     setIsEditing(false); // Exit edit mode
   };
 
@@ -111,6 +113,7 @@ const Profile = () => {
           </div>
         </div>
       )}
+      <ToastContainer position="bottom-center" autoClose={3000} />
     </div>
   );
 };

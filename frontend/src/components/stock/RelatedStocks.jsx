@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import RelatedStockCard from './RelatedStockCard';
 import './RelatedStocks.css';
+import API from '../../api/axios';
 
 const RelatedStocks = ({ symbol }) => {
   const [stocksData, setStocksData] = useState([]);
@@ -13,7 +13,7 @@ const RelatedStocks = ({ symbol }) => {
   useEffect(() => {
     const fetchPeers = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/stocks/peers/${symbol}`);
+        const res = await API.get(`/api/stocks/peers/${symbol}`);
         const peers = res.data.peers || [];
  
         const stockDetails = [];
@@ -27,7 +27,7 @@ const RelatedStocks = ({ symbol }) => {
           }
 
           try {
-            const priceRes = await axios.get(`http://localhost:5000/api/stocks/price/${peer}`);
+            const priceRes = await API.get(`/api/stocks/price/${peer}`);
             const { current, previousClose } = priceRes.data;
             const change = current - previousClose;
  

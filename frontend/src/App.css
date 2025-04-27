@@ -18,6 +18,15 @@ body {
   text-align: center;
 }
 
+
+#modal-root {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+}
+
+
 .logo {
   height: 6em;
   padding: 1.5em;

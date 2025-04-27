@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 import StockChart from './StockChart';
 import WatchList from './WatchList';
+import API from '../../api/axios';
 
 
 const Dashboard = () => {
@@ -19,14 +20,14 @@ const Dashboard = () => {
     const fetchUser = async () => {
       const stored = JSON.parse(localStorage.getItem('stoxieUser'));
       const token = user?.token || stored?.token;
-
+      
       if (!token) {
         setLoading(false);
         return;
       }
 
       try {
-        const res = await axios.get('http://localhost:5000/api/user/me', {
+        const res = await API.get('/api/user/me', {
           headers: { Authorization: `Bearer ${token}` },
         });
         setUser(prev => ({ ...prev, ...res.data }));

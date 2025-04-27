@@ -5,6 +5,7 @@ import "./DashboardNavbar.css";
 import logo from "../../assets/logo.png";
 import { useAuth } from "../../context/AuthContext";
 import axios from "axios";
+import API from "../../api/axios";
 
 const DashboardNavbar = () => {
   const { user, setUser } = useAuth(); 
@@ -16,7 +17,7 @@ const DashboardNavbar = () => {
     const fetchBalance = async () => {
       try {
         if (user?._id) {
-          const response = await axios.get(`http://localhost:5000/api/user/balance/${user._id}`);
+          const response = await API.get(`/api/user/balance/${user._id}`);
           const updatedBalance = response.data.balance;
           setBalance(updatedBalance);
           

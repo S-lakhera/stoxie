@@ -2,9 +2,10 @@
 import React, { useState, useEffect } from 'react';
 import './BuySellModal.css';
 import ReactDOM from 'react-dom';
-import axios from 'axios';
-import { toast } from 'react-toastify';
+import { showSuccess, showError } from '../../utils/toastHandler';
 import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from "react-toastify";
+import API from '../../api/axios';
 
 
 const BuySellModal = ({ stockSymbol, stockPrice, closeModal, userBalance, transactionType: initialType,onTransactionSuccess }) => {
@@ -35,19 +36,19 @@ const BuySellModal = ({ stockSymbol, stockPrice, closeModal, userBalance, transa
     const userId = storedUser?.id;
   
     if (!userId) {
-      toast.error('User not authenticated. Please log in again.');
+      showError('User not authenticated. Please log in again.');
       return;
     }
   
     try {
       // First check holdings if it's a sell order
       if (transactionType === 'sell') {
-        const holdingsResponse = await axios.get(`http://localhost:5000/api/holdings/${userId}`);
+        const holdingsResponse = await API.get(`/api/holdings/${userId}`);
         const stockHolding = holdingsResponse.data.find(h => h.symbol === stockSymbol);
         
         if (!stockHolding) {
           // Create a rejected order
-          await axios.post('http://localhost:5000/api/transaction', {
+          await API.post('/api/transaction', {
             userId,
             type: 'sell',
             stockSymbol,
@@ -57,14 +58,14 @@ const BuySellModal = ({ stockSymbol, stockPrice, closeModal, userBalance, transa
             status: 'rejected',
             rejectionReason: 'Stock not in holdings'
           });
-          toast.error(`You don't own ${stockSymbol} in your holdings`);
+          showError(`You don't own ${stockSymbol} in your holdings`);
           closeModal();
           return;
         }
         
         if (q > stockHolding.quantity) {
           // Create a rejected order
-          await axios.post('http://localhost:5000/api/transaction', {
+          await API.post('/api/transaction', {
             userId,
             type: 'sell',
             stockSymbol,
@@ -74,14 +75,14 @@ const BuySellModal = ({ stockSymbol, stockPrice, closeModal, userBalance, transa
             status: 'rejected',
             rejectionReason: 'Insufficient quantity'
           });
-          toast.error(`You only have ${stockHolding.quantity} shares of ${stockSymbol}`);
+          showError(`You only have ${stockHolding.quantity} shares of ${stockSymbol}`);
           closeModal();
           return;
         }
       }
   
       // Proceed with normal transaction if validation passes
-      const response = await axios.post('http://localhost:5000/api/transaction', {
+      const response = await API.post('/api/transaction', {
         userId,
         type: transactionType,
         stockSymbol,
@@ -90,8 +91,11 @@ const BuySellModal = ({ stockSymbol, stockPrice, closeModal, userBalance, transa
         total,
         status: "pending" // Will be updated to completed by backend if successful
       });
-  
-      toast.success(`Successfully ${transactionType === 'buy' ? 'bought' : 'sold'} ${q} ${stockSymbol} shares!`);
+      
+      // Buy Order placed for 1 share of Amzn at 
+
+      showSuccess(`${transactionType === 'buy' ? 'Buy' : 'Sell'} order placed for ${q} share of ${stockSymbol} at $${stockPrice}!`);
+      // showSuccess(`Successfully ${transactionType === 'buy' ? 'bought' : 'sold'} ${q} ${stockSymbol} shares!`);
   
       if (onTransactionSuccess) {
         const updatedBalance = response.data.newBalance ?? 
@@ -102,10 +106,12 @@ const BuySellModal = ({ stockSymbol, stockPrice, closeModal, userBalance, transa
         onTransactionSuccess(updatedBalance);
       }
       
-      closeModal();
+      setTimeout(() => {
+        closeModal();
+      }, 3000);
     } catch (err) {
       console.error('Transaction error:', err.response?.data || err.message);
-      toast.error(err.response?.data?.message || 'Transaction failed. Try again.');
+      showError(err.response?.data?.message || 'Transaction failed. Try again.');
       closeModal()
     }
   };
@@ -170,6 +176,7 @@ const BuySellModal = ({ stockSymbol, stockPrice, closeModal, userBalance, transa
               <button className="cancel-btn" onClick={closeModal}>Cancel</button>
             </div>
           </div>
+        <ToastContainer position="bottom-center" autoClose={3000} />
         </div>
       </div>
     ),

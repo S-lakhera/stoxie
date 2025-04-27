@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
-import logo from "../../assets/logo.png";
 import { FaWallet, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
 import { LuArrowUpRight } from "react-icons/lu";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useAuth } from "../../context/AuthContext"; // 👈 Make sure this path is correct
+import API from "../../api/axios";
+import { showSuccess, showError } from '../../utils/toastHandler';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -32,8 +32,8 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault(); 
-    try {
-      const res = await axios.post("http://localhost:5000/api/auth/login", formData);
+    try { 
+      const res = await API.post("/api/auth/login", formData);
  
       const { user, token } = res.data; // ✅ token bhi destructure kar
 
@@ -41,7 +41,7 @@ const Login = () => {
       login({ ...user, token }); // ✅ context me bhi bhej token
       
 
-      toast.success("Login successful!");
+      showSuccess("Login successful!");
 
       setTimeout(() => {
         navigate("/dashboard");
@@ -51,21 +51,21 @@ const Login = () => {
       const serverMessage = err.response?.data?.message?.toLowerCase();
 
       if (serverMessage?.includes("not found") || serverMessage?.includes("no such")) {
-        toast.error("No account found with this email.");
+        showError("No account found with this email.");
       } else if (
         serverMessage?.includes("incorrect") ||
         serverMessage?.includes("wrong") ||
         serverMessage?.includes("invalid")
       ) {
-        toast.error("Incorrect password. Please try again.");
+        showError("Incorrect password. Please try again.");
       } else if (serverMessage) {
-        toast.error(serverMessage);
+        showError(serverMessage);
       } else {
-        toast.error("Login failed. Please try again.");
+        showError("Login failed. Please try again.");
       }
     }
   };
-
+ 
   return (
     <div className="login-container">
       <div className="login-left">
@@ -137,7 +137,7 @@ const Login = () => {
           </p>
         </form>
       </div>
-      <ToastContainer position="top-center" autoClose={3000} />
+      <ToastContainer position="bottom-center" autoClose={3000} />
     </div>
   );
 };

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import StockStats from './StockStats';
 import StockGraph from './StockGraph';
+import API from '../../api/axios';
 
 const StockChart = ({ symbol = "AAPL" }) => {
   const [quote, setQuote] = useState(null);
@@ -9,7 +10,7 @@ const StockChart = ({ symbol = "AAPL" }) => {
   useEffect(() => {
     const fetchQuote = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/stocks/price/${symbol}`);
+        const res = await API.get(`/api/stocks/price/${symbol}`);
         setQuote(res.data); 
       } catch (err) {
         console.error('Error fetching quote:', err.message);

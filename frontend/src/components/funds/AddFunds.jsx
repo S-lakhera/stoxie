@@ -3,6 +3,7 @@ import './AddFunds.css';
 import { useAuth } from '../../context/AuthContext';
 import axios from 'axios';
 import { FiArrowUp, FiArrowDown, FiDollarSign, FiClock } from 'react-icons/fi';
+import API from '../../api/axios';
 
 const AddFunds = () => {
   const { user, setUser } = useAuth();
@@ -19,7 +20,7 @@ const AddFunds = () => {
     
     const fetchBalance = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/user/balance/${user._id}`);
+        const res = await API.get(`/api/user/balance/${user._id}`);
         setBalance(res.data.balance);
         const updatedUser = { ...user, walletBalance: res.data.balance };
         setUser(updatedUser);
@@ -44,7 +45,7 @@ const AddFunds = () => {
     setIsProcessing(true);
     
     try {
-      const response = await axios.patch(`http://localhost:5000/api/user/balance/${user._id}`, {
+      const response = await API.patch(`/api/user/balance/${user._id}`, {
         type: mode,
         amount: amt,
       });
