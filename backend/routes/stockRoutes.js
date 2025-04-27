@@ -1,8 +1,10 @@
 import express from 'express';
 import axios from 'axios';
 import { getCache, setCache } from '../utils/cache.js';
+
+
 const router = express.Router();
-const API_KEY = 'cvrscjpr01qnpem9e2rgcvrscjpr01qnpem9e2s0';
+const API_KEY = process.env.FINNHUB_API_KEY;
 
 // Price route with caching
 router.get('/price/:symbol', async (req, res) => {
