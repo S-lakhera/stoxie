@@ -12,7 +12,7 @@ import holdingRoutes from './routes/holdingRoutes.js'
 import { clearCache } from './utils/cache.js';
 import { updatePopularStockPrices } from './jobs/stockPriceUpdater.js';
 import stockGraphRoutes from './routes/stockGraph.js'
-
+ 
 
 clearCache();
 dotenv.config();
